@@ -21,7 +21,18 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const hasLabels = context.payload.pull_request.labels.length > 0;
-            console.log(context.payload.pull_request.labels);
-            console.log("has labels", hasLabels);
+            const labelCheck = context.payload.pull_request.labels.length > 0;
+            const output = `#### Label check: ⚙️\`${{ labelCheck ? 'success' : 'failure' }}\`
 
+            *\`${{ labelCheck
+              ? 'You have correctly labeled the pull request ! Wait for a code review now !'
+              : 'You need to attach an existing issue to this pull request in order get this code merged !' }}\`*
+
+            *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
+
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: output
+            });
