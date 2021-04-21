@@ -22,11 +22,11 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const labelCheck = context.payload.pull_request.labels.length > 0;
-            const output = `#### Label check: ⚙️\`${ labelCheck ? 'success' : 'failure' }\`
+            const output = `#### Label check: ⚙️\`${ labelCheck ? 'success' : 'failure' }\``
 
-            *\`${ labelCheck
+            **\`${ labelCheck
               ? 'You have correctly labeled the pull request ! Wait for a code review now !'
-              : 'You need to attach an existing issue to this pull request in order get this code merged !' }\`*
+              : 'You need to attach an existing issue to this pull request in order get this code merged !' }\`**
 
             *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
 
