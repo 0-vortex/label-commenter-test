@@ -36,3 +36,5 @@ jobs:
               repo: context.repo.repo,
               body: output
             });
+
+            labelCheck && core.setFailed('Action failed')
