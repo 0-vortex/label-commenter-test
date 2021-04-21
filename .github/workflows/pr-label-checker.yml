@@ -21,7 +21,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            console.log(context);
-            console.log("context");
-            console.log(context.issue);
+            const hasLabels = context.payload.pull_request.labels.length > 0;
+            console.log(context.payload.pull_request.labels);
+            console.log("has labels", hasLabels);
 
