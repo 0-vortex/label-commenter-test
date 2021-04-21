@@ -22,5 +22,6 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             console.log(context);
+            console.log("context");
             console.log(context.issue);
 
