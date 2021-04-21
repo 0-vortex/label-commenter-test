@@ -30,11 +30,13 @@ jobs:
 
             *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
 
-            github.issues.createComment({
+            await github.issues.createComment({
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
               body: output
             });
 
-            labelCheck && core.setFailed('Action failed')
+            if (!labelCheck) {
+              return core.setFailed('Action failed');
+            }
